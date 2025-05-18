@@ -1,6 +1,7 @@
 using AgendaApp.Modelos;
 using AgendaApp.Datos;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace AgendaApp.Admin
 {
@@ -12,7 +13,6 @@ namespace AgendaApp.Admin
         public MusicaPage()
         {
             InitializeComponent();
-
             _database = new BaseDatabase();
             Musicas = new ObservableCollection<Musica>();
             BindingContext = this;
@@ -21,38 +21,28 @@ namespace AgendaApp.Admin
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            await CargarMusicasAsync();
+        }
 
+        private async Task CargarMusicasAsync()
+        {
             var musicasLista = await _database.ObtenerMusicasAsync();
             Musicas.Clear();
             foreach (var musica in musicasLista)
                 Musicas.Add(musica);
         }
 
-        private async void MusicaCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void OnCancionSeleccionada(object sender, SelectionChangedEventArgs e)
         {
-            var cancionSeleccionada = e.CurrentSelection.FirstOrDefault() as Musica;
-            if (cancionSeleccionada == null)
+            if (e.CurrentSelection.FirstOrDefault() is not Musica cancionSeleccionada)
                 return;
 
-            bool confirmacion = await DisplayAlert("Eliminar Canción",
-                $"¿Deseas eliminar '{cancionSeleccionada.Titulo}' de {cancionSeleccionada.Artista}?",
-                "Sí", "No");
+            // Pasar callback para actualizar la lista después de eliminar
+            await Navigation.PushAsync(new DetalleMusicaPage(
+                cancionSeleccionada,
+                actualizarListaCallback: async () => await CargarMusicasAsync()));
 
-            if (confirmacion)
-            {
-                int resultado = await _database.EliminarMusicaAsync(cancionSeleccionada.Id);
-                if (resultado > 0)
-                {
-                    Musicas.Remove(cancionSeleccionada);
-                    await DisplayAlert("Éxito", "Canción eliminada correctamente.", "OK");
-                }
-                else
-                {
-                    await DisplayAlert("Error", "No se pudo eliminar la canción.", "OK");
-                }
-            }
-
-            MusicaCollectionView.SelectedItem = null;
+            ((CollectionView)sender).SelectedItem = null;
         }
     }
 }

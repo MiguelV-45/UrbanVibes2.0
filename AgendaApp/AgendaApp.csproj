@@ -65,6 +65,12 @@
 		<MauiXaml Update="Admin\AdminPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Admin\DetalleMusicaPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Admin\DetalleUsuarioPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Admin\MusicaPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

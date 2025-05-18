@@ -8,7 +8,7 @@
     <CollectionView x:Name="MusicaCollectionView"
                     ItemsSource="{Binding Musicas}"
                     SelectionMode="Single"
-                    SelectionChanged="MusicaCollectionView_SelectionChanged"
+                    SelectionChanged="OnCancionSeleccionada" 
                     Margin="10">
 
         <CollectionView.ItemTemplate>
@@ -33,6 +33,5 @@
                 </Frame>
             </DataTemplate>
         </CollectionView.ItemTemplate>
-
     </CollectionView>
 </ContentPage>

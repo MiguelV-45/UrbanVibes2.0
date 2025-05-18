@@ -5,34 +5,51 @@
              Title="Usuarios Registrados"
              BackgroundColor="#FAFAFA">
 
-    <CollectionView x:Name="UsuariosCollectionView"
-                    ItemsSource="{Binding Usuarios}"
-                    SelectionMode="Single"
-                    SelectionChanged="UsuariosCollectionView_SelectionChanged"
-                    Margin="10">
+    <RefreshView x:Name="refreshView"
+                 IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}">
+        <CollectionView x:Name="usuariosCollectionView"
+                        ItemsSource="{Binding Usuarios}"
+                        SelectionMode="Single"
+                        SelectionChanged="OnUsuarioSeleccionado"
+                        Margin="10">
 
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame Padding="15"
-                       Margin="8"
-                       CornerRadius="12"
-                       HasShadow="True"
-                       BorderColor="#DDD"
-                       BackgroundColor="White">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="15"
+                           Margin="8"
+                           CornerRadius="12"
+                           HasShadow="True"
+                           BorderColor="#DDD"
+                           BackgroundColor="White">
 
-                    <StackLayout Spacing="4">
-                        <Label Text="{Binding NombreUsuario}"
-                               FontAttributes="Bold"
-                               FontSize="18"
-                               TextColor="#333" />
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
+                            <Label Grid.Column="0" Grid.Row="0"
+                                   Text="{Binding NombreUsuario}"
+                                   FontAttributes="Bold"
+                                   FontSize="18"
+                                   TextColor="#333" />
 
-                        <Label Text="{Binding Email}"
-                               FontSize="14"
-                               TextColor="#666" />
-                    </StackLayout>
-                </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
+                            <Label Grid.Column="1" Grid.Row="0"
+                                   Text="{Binding Email}"
+                                   FontSize="14"
+                                   TextColor="#666"
+                                   HorizontalOptions="End"/>
 
-    </CollectionView>
+                            <Label Grid.Column="0" Grid.Row="1"
+                                   Text="{Binding Nombre}"
+                                   FontSize="14"
+                                   TextColor="#666"/>
+
+                            <Label Grid.Column="1" Grid.Row="1"
+                                   Text="{Binding Telefono}"
+                                   FontSize="14"
+                                   TextColor="#666"
+                                   HorizontalOptions="End"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
 </ContentPage>

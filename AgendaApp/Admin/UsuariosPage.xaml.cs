@@ -1,56 +1,58 @@
-using AgendaApp.Modelos;
 using AgendaApp.Datos;
+using AgendaApp.Modelos;
 using System.Collections.ObjectModel;
 
 namespace AgendaApp.Admin
 {
     public partial class UsuariosPage : ContentPage
     {
-        public ObservableCollection<Usuario> Usuarios { get; set; }
-        private BaseDatabase _database;
+        private readonly BaseDatabase _database;
+        private ObservableCollection<Usuario> _usuarios;
+
+        public bool IsRefreshing { get; set; }
+        public Command RefreshCommand { get; }
 
         public UsuariosPage()
         {
             InitializeComponent();
-
             _database = new BaseDatabase();
-            Usuarios = new ObservableCollection<Usuario>();
+
+            RefreshCommand = new Command(async () => await LoadUsuariosAsync());
             BindingContext = this;
+
+            LoadUsuariosAsync();
         }
 
-        protected override async void OnAppearing()
+        private async Task LoadUsuariosAsync()
         {
-            base.OnAppearing();
-
-            var usuariosLista = await _database.ObtenerUsuariosAsync();
-            Usuarios.Clear();
-            foreach (var usuario in usuariosLista)
-                Usuarios.Add(usuario);
-        }
-
-        private async void UsuariosCollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var usuarioSeleccionado = e.CurrentSelection.FirstOrDefault() as Usuario;
-            if (usuarioSeleccionado == null)
-                return;
-
-            bool confirmar = await DisplayAlert("Eliminar", $"¿Eliminar a {usuarioSeleccionado.NombreUsuario}?", "Sí", "No");
-            if (confirmar)
+            try
             {
-                int resultado = await _database.EliminarUsuarioAsync(usuarioSeleccionado.Id);
+                IsRefreshing = true;
+                OnPropertyChanged(nameof(IsRefreshing));
 
-                if (resultado > 0)
-                {
-                    Usuarios.Remove(usuarioSeleccionado);
-                    await DisplayAlert("Eliminado", "Usuario eliminado.", "OK");
-                }
-                else
-                {
-                    await DisplayAlert("Error", "No se pudo eliminar el usuario.", "OK");
-                }
+                var usuarios = await _database.ObtenerUsuariosAsync();
+                _usuarios = new ObservableCollection<Usuario>(usuarios);
+                usuariosCollectionView.ItemsSource = _usuarios;
             }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Error al cargar usuarios: {ex.Message}", "OK");
+            }
+            finally
+            {
+                IsRefreshing = false;
+                OnPropertyChanged(nameof(IsRefreshing));
+                refreshView.IsRefreshing = false;
+            }
+        }
 
-            UsuariosCollectionView.SelectedItem = null;
+        private async void OnUsuarioSeleccionado(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.FirstOrDefault() is Usuario usuarioSeleccionado)
+            {
+                await Navigation.PushAsync(new DetalleUsuarioPage(usuarioSeleccionado));
+                usuariosCollectionView.SelectedItem = null;
+            }
         }
     }
 }

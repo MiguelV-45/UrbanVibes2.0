@@ -53,30 +53,50 @@ namespace AgendaApp.Views
 
         private async void GuardarButton_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(rutaArchivoSeleccionado))
+            try
             {
-                await DisplayAlert("Error", "Debes seleccionar un archivo MP3 primero.", "OK");
-                return;
+                // Validación básica
+                if (string.IsNullOrWhiteSpace(tituloEntry.Text) ||
+                    string.IsNullOrWhiteSpace(artistaEntry.Text) ||
+                    string.IsNullOrWhiteSpace(rutaArchivoSeleccionado))
+                {
+                    await DisplayAlert("Error", "Por favor completa todos los campos y selecciona un archivo", "OK");
+                    return;
+                }
+
+                var musica = new Musica
+                {
+                    Titulo = tituloEntry.Text,
+                    Artista = artistaEntry.Text,
+                    Genero = generoEntry.Text,
+                    RutaArchivo = rutaArchivoSeleccionado
+                };
+
+                int resultado = await App.Database.GuardarMusicaAsync(musica);
+
+                if (resultado > 0)
+                {
+                    // Limpiar los campos
+                    tituloEntry.Text = string.Empty;
+                    artistaEntry.Text = string.Empty;
+                    generoEntry.Text = string.Empty;
+                    archivoSeleccionadoLabel.Text = "Archivo no seleccionado";
+                    rutaArchivoSeleccionado = null;
+
+                    // Mostrar confirmación
+                    await DisplayAlert("Éxito", "Música guardada correctamente", "OK");
+
+                    // Navegar a MainPage usando la ruta registrada
+                    await Shell.Current.GoToAsync("//main");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No se pudo guardar la música", "OK");
+                }
             }
-
-            var musica = new Musica
+            catch (Exception ex)
             {
-                Titulo = tituloEntry.Text,
-                Artista = artistaEntry.Text,
-                Genero = generoEntry.Text,
-                RutaArchivo = rutaArchivoSeleccionado
-            };
-
-            int resultado = await App.Database.GuardarMusicaAsync(musica);
-
-            if (resultado > 0)
-            {
-                await DisplayAlert("Éxito", "Música guardada correctamente", "OK");
-                await Navigation.PopAsync();
-            }
-            else
-            {
-                await DisplayAlert("Error", "No se pudo guardar la música", "OK");
+                await DisplayAlert("Error", $"Ocurrió un error: {ex.Message}", "OK");
             }
         }
     }

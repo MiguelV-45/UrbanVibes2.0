@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgendaApp.Admin.DetalleUsuarioPage"
+             Title="Detalle Usuario">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Detalles del Usuario" />
+
+            <Entry x:Name="NombreUsuarioEntry" Placeholder="Nombre de usuario" Text="{Binding NombreUsuario}" />
+            <Entry x:Name="NombreEntry" Placeholder="Nombre completo" Text="{Binding Nombre}" />
+            <Entry x:Name="EmailEntry" Placeholder="Email" Text="{Binding Email}" Keyboard="Email" />
+            <Entry x:Name="TelefonoEntry" Placeholder="Teléfono" Text="{Binding Telefono}" Keyboard="Telephone" />
+
+            <Button Text="Guardar Cambios" Clicked="OnGuardarCambiosClicked" 
+                    BackgroundColor="#4CAF50" TextColor="White" />
+
+            <Button Text="Eliminar Usuario"
+                    Clicked="OnEliminarClicked"
+                    BackgroundColor="#F44336"
+                    TextColor="White" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -3,6 +3,7 @@ using SQLite;
 using AgendaApp.Modelos;
 using System.Diagnostics;
 
+
 namespace AgendaApp.Datos
 {
     public class BaseDatabase
@@ -169,11 +170,29 @@ namespace AgendaApp.Datos
         {
             try
             {
-                return await _db.DeleteAsync<Musica>(id);
+                // Verifica que la conexión esté inicializada
+                if (_db == null)
+                {
+                    Debug.WriteLine("Error: La conexión a la base de datos es nula");
+                    return 0;
+                }
+
+                // Verifica que el ID sea válido
+                if (id <= 0)
+                {
+                    Debug.WriteLine($"Error: ID inválido ({id})");
+                    return 0;
+                }
+
+                // Ejecuta la eliminación
+                var resultado = await _db.DeleteAsync<Musica>(id);
+                Debug.WriteLine($"Resultado de eliminación: {resultado} fila(s) afectada(s)");
+
+                return resultado;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error al eliminar música: {ex.Message}");
+                Debug.WriteLine($"Error completo al eliminar: {ex.ToString()}");
                 return 0;
             }
         }
