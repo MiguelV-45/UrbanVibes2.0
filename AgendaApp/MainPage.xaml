@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgendaApp.MainPage"
+             Title="Agenda Personal"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#FF0000</Color>
+            <Color x:Key="TextLight">#E0E0E0</Color>
+
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style TargetType="ImageButton">
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <!-- Óvalo superior decorativo -->
+        <Frame BackgroundColor="Red"
+               CornerRadius="300"
+               HeightRequest="250"
+               WidthRequest="600"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="0,-150,0,0"
+               HasShadow="False" />
+
+        <!-- Óvalo inferior decorativo -->
+        <Frame BackgroundColor="Red"
+               CornerRadius="300"
+               HeightRequest="250"
+               WidthRequest="600"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               Margin="0,0,0,-150"
+               HasShadow="False" />
+
+        <ScrollView>
+            <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
+
+                <!-- Botón de perfil (parte superior) -->
+                <HorizontalStackLayout HorizontalOptions="End">
+                    <ImageButton Source="profile.svg"
+                                 Clicked="Perfil_Clicked"
+                                 CornerRadius="25"
+                                 BackgroundColor="Transparent" />
+                </HorizontalStackLayout>
+
+                <!-- Título -->
+                <Label Text="Inicio"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="{StaticResource Accent}" />
+
+                <!-- Botones principales -->
+                <Button Text="⚙️ Configuración"
+                        Clicked="IrConfiguracion" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

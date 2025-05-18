@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgendaApp.Views.RegistroPage"
+             Title="Registro"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <!-- Óvalo superior -->
+        <Frame BackgroundColor="#B70000"
+               CornerRadius="300"
+               HeightRequest="250"
+               WidthRequest="600"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="0,-150,0,0"
+               HasShadow="False" />
+
+        <!-- Óvalo inferior -->
+        <Frame BackgroundColor="#B70000"
+               CornerRadius="300"
+               HeightRequest="250"
+               WidthRequest="600"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               Margin="0,0,0,-150"
+               HasShadow="False" />
+
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Center">
+
+                <!-- Flecha de regreso -->
+                <Grid>
+                    <Image Source="flecha_izquierda.png"
+                           HeightRequest="30"
+                           WidthRequest="30"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBackTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+                <Label Text="Registro de Usuario"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="Black" />
+
+                <!-- Campo Usuario -->
+                <Frame BackgroundColor="#f1f1f1"
+                       CornerRadius="10"
+                       HasShadow="False"
+                       Padding="0">
+                    <Entry x:Name="UsernameEntry"
+                           Placeholder="Nombre de usuario"
+                           FontSize="18"
+                           BackgroundColor="Transparent"
+                           TextColor="Black"
+                           Margin="10,0"/>
+                </Frame>
+
+                <!-- Campo Correo -->
+                <Frame BackgroundColor="#f1f1f1"
+                       CornerRadius="10"
+                       HasShadow="False"
+                       Padding="0">
+                    <Entry x:Name="EmailEntry"
+                           Placeholder="Correo electrónico"
+                           FontSize="18"
+                           Keyboard="Email"
+                           BackgroundColor="Transparent"
+                           TextColor="Black"
+                           Margin="10,0"/>
+                </Frame>
+
+                <!-- Campo Contraseña -->
+                <Frame BackgroundColor="#f1f1f1"
+                       CornerRadius="10"
+                       HasShadow="False"
+                       Padding="0">
+                    <Entry x:Name="PasswordEntry"
+                           Placeholder="Contraseña"
+                           FontSize="18"
+                           IsPassword="True"
+                           BackgroundColor="Transparent"
+                           TextColor="Black"
+                           Margin="10,0"/>
+                </Frame>
+
+                <!-- Botón Registrar -->
+                <Button Text="Registrar"
+                        Clicked="RegisterButton_Clicked"
+                        FontSize="18"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="50"/>
+
+                <!-- Ir al login -->
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Label Text="¿Ya tienes una cuenta?" />
+                    <Label Text="Inicia sesión"
+                           TextColor="Red"
+                           FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLoginTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

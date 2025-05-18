@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgendaApp.Views.EditarPerfilPage"
+             Title="Editar Perfil">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Nombre completo" />
+            <Entry x:Name="entryNombre" Placeholder="Nombre completo" />
+
+            <Label Text="Nombre de usuario" />
+            <Entry x:Name="entryUsuario" Placeholder="Usuario" />
+
+            <Label Text="Correo electrónico" />
+            <Entry x:Name="entryEmail" Placeholder="Correo" Keyboard="Email" />
+
+            <Label Text="Teléfono" />
+            <Entry x:Name="entryTelefono" Placeholder="Teléfono" Keyboard="Telephone" />
+
+            <Button Text="Guardar cambios" Clicked="OnGuardarClicked"
+                    BackgroundColor="Black" TextColor="White" CornerRadius="10" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

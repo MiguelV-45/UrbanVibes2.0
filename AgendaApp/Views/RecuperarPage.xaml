@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgendaApp.Views.RecuperarPage"
+             Title="Recuperar Contraseña"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <!-- Óvalo superior -->
+        <Frame BackgroundColor="#B70000"
+               CornerRadius="300"
+               HeightRequest="250"
+               WidthRequest="600"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="0,-150,0,0"
+               HasShadow="False" />
+
+        <!-- Óvalo inferior -->
+        <Frame BackgroundColor="#B70000"
+               CornerRadius="300"
+               HeightRequest="250"
+               WidthRequest="600"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               Margin="0,0,0,-150"
+               HasShadow="False" />
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+
+                <!-- Logo -->
+                <Frame BackgroundColor="Transparent"
+                       Padding="0"
+                       HasShadow="False"
+                       CornerRadius="100"
+                       HeightRequest="150"
+                       WidthRequest="150"
+                       HorizontalOptions="Center">
+                    <Image Source="brushfill.png"
+                           Aspect="AspectFill"
+                           HeightRequest="150"
+                           WidthRequest="150"/>
+                </Frame>
+
+                <!-- Título -->
+                <Label Text="Recuperar Contraseña"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+
+                <!-- Campos -->
+                <Entry x:Name="EmailEntry"
+                       Placeholder="Correo electrónico"
+                       Keyboard="Email"
+                       BackgroundColor="#f1f1f1"
+                       FontSize="16"
+                       HeightRequest="50"
+                       TextColor="Black"/>
+
+                <Entry x:Name="NewPasswordEntry"
+                       Placeholder="Nueva contraseña"
+                       IsPassword="True"
+                       BackgroundColor="#f1f1f1"
+                       FontSize="16"
+                       HeightRequest="50"
+                       TextColor="Black"/>
+
+                <!-- Botón -->
+                <Button Text="Guardar"
+                        FontSize="18"
+                        Clicked="Guardar_Clicked"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        CornerRadius="20"
+                        HeightRequest="50"/>
+
+                <!-- Enlace de regreso -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5">
+                    <Label Text="¿Ya tienes cuenta?" FontSize="14" TextColor="Black"/>
+                    <Label Text="Inicia sesión"
+                           FontSize="14"
+                           TextColor="#B70000"
+                           FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="VolverLogin_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

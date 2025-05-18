@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgendaApp.Admin.AdminPage"
+             Title="Administrador"
+             BackgroundColor="#F5F5F5">
+
+    <Grid Padding="30">
+
+        <!-- Fondo con gradiente suave -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#B70000" Offset="0.0" />
+                <GradientStop Color="#8A0000" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <VerticalStackLayout Spacing="25" VerticalOptions="Center" HorizontalOptions="Center" WidthRequest="280">
+
+            <Label Text="Panel de Administración" 
+                   FontAttributes="Bold" 
+                   FontSize="28" 
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+
+            <Button Text="Ver Usuarios" 
+                    Clicked="BtnVerUsuarios_Clicked"
+                    BackgroundColor="White"
+                    TextColor="#B70000"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="280"/>
+
+            <Button Text="Ver Canciones" 
+                    Clicked="BtnVerCanciones_Clicked"
+                    BackgroundColor="White"
+                    TextColor="#B70000"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="280"/>
+
+            <Button Text="Cerrar Sesión" 
+                    Clicked="BtnCerrarSesion_Clicked"
+                    BackgroundColor="#FF3B3B"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="25"
+                    HeightRequest="50"
+                    WidthRequest="280"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

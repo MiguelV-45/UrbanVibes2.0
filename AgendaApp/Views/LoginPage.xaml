@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgendaApp.Views.LoginPage"
+             Title="LoginPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <!-- Óvalo superior -->
+        <Frame BackgroundColor="#B70000"
+               CornerRadius="300"
+               HeightRequest="250"
+               WidthRequest="600"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="0,-150,0,0"
+               HasShadow="False" />
+
+        <Image Source="appicon.png"
+               Aspect="AspectFill"
+               HeightRequest="150"
+               WidthRequest="150"/>
+
+        <!-- Óvalo inferior -->
+        <Frame BackgroundColor="#B70000"
+               CornerRadius="300"
+               HeightRequest="250"
+               WidthRequest="600"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               Margin="0,0,0,-150"
+               HasShadow="False" />
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="20" Padding="30" VerticalOptions="Center">
+
+                <!-- Logo circular -->
+                <Frame BackgroundColor="Transparent"
+                       Padding="0"
+                       HasShadow="False"
+                       CornerRadius="100"
+                       HeightRequest="150"
+                       WidthRequest="150"
+                       HorizontalOptions="Center">
+                    <Image Source="brushfill.png"
+                           Aspect="AspectFill"
+                           HeightRequest="150"
+                           WidthRequest="150"/>
+                </Frame>
+
+                <!-- Título -->
+                <Label Text="Iniciar sesión" 
+                       FontSize="24" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,10"
+                       TextColor="Black"/>
+
+                <!-- Campos del formulario -->
+                <Entry Placeholder="Usuario"
+                       x:Name="Username"
+                       BackgroundColor="#f1f1f1"
+                       HeightRequest="50"
+                       TextColor="Black"/>
+
+                <Entry Placeholder="Contraseña"
+                       x:Name="Password"
+                       IsPassword="True"
+                       BackgroundColor="#f1f1f1"
+                       HeightRequest="50"
+                       TextColor="Black"/>
+
+                <!-- Botón de login -->
+                <Button Text="Acceder"
+                        Clicked="LoginButton_Clicked"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        CornerRadius="20"
+                        HeightRequest="50"
+                        Margin="0,20"/>
+
+                <!-- Enlaces adicionales -->
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5">
+                    <Label Text="¿No tienes cuenta?" FontSize="14" TextColor="Black"/>
+                    <Label Text="Regístrate" FontSize="14" TextColor="#B70000" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerReg_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="5">
+                    <Label Text="¿Olvidaste tu contraseña?" FontSize="14" TextColor="Black"/>
+                    <Label Text="Recuperar" FontSize="14" TextColor="#B70000" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerPwd_Tapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

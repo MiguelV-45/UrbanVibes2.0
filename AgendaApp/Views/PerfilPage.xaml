@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgendaApp.Views.PerfilPage"
+             Title="Tu perfil">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Foto de perfil -->
+            <Frame HeightRequest="150" WidthRequest="150" 
+                   CornerRadius="75" HorizontalOptions="Center"
+                   Padding="0" >
+                <Image Aspect="AspectFill" Source="appicon.png"/>
+            </Frame>
+
+            <!-- Datos del usuario -->
+            <Frame Padding="15" CornerRadius="10" BackgroundColor="#F5F5F5">
+                <VerticalStackLayout Padding="20" Spacing="10">
+                    <Label Text="Usuario:" />
+                    <Label x:Name="lblNombreUsuario" FontAttributes="Bold" />
+
+                    <Label Text="Correo electrónico:" />
+                    <Label x:Name="lblEmail" />
+
+                    <Label Text="Fecha de registro:" />
+                    <Label x:Name="lblFechaRegistro" />
+
+                    <Label Text="Estado:" />
+                    <Label x:Name="lblActivo" />
+
+                    <Button Text="Editar perfil" Clicked="OnEditarPerfilClicked" 
+                            BackgroundColor="Black" TextColor="White"/>
+                    <Button Text="Cerrar sesión" Clicked="OnCerrarSesionClicked"
+                            BackgroundColor="Red" TextColor="White" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

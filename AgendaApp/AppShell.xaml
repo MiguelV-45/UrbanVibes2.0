@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="AgendaApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:AgendaApp.Views"
+    xmlns:pages="clr-namespace:AgendaApp"
+    xmlns:admin="clr-namespace:AgendaApp.Admin"
+    Shell.FlyoutBehavior="Disabled"
+    Title="UrbanVibes">
+
+    <!-- Rutas independientes -->
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:LoadingPage}"
+        Route="loading" />
+
+    <ShellContent 
+        Title="Login" 
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="login" />
+
+    <ShellContent 
+        Title="Registro"
+        ContentTemplate="{DataTemplate views:RegistroPage}"
+        Route="registro"/>
+
+    <ShellContent 
+        Title="Recuperar"
+        ContentTemplate="{DataTemplate views:RecuperarPage}"
+        Route="recuperar"/>
+
+    <!-- Página de Configuración -->
+    <ShellContent 
+        Title="Configuración"
+        ContentTemplate="{DataTemplate views:ConfiguracionPage}"
+        Route="configuracion"/>
+
+    <!-- Página Admin -->
+    <ShellContent
+        Title="Administración"
+        ContentTemplate="{DataTemplate admin:AdminPage}"
+        Route="admin" />
+
+    <!-- TabBar -->
+    <TabBar>
+        <!-- Home -->
+        <Tab Title="Home" Icon="appicon.svg">
+            <ShellContent
+                Icon="house_door_fill.svg"
+                Title="Inicio"
+                ContentTemplate="{DataTemplate pages:MainPage}"
+                Route="main" />
+        </Tab>
+
+        <!-- Tu perfil -->
+        <Tab Title="Perfil" Icon="person_fill.svg">
+            <ShellContent
+                Title="Perfil"
+                Icon="person_fill.svg"
+                ContentTemplate="{DataTemplate views:PerfilPage}"
+                Route="perfil" />
+        </Tab>
+
+        <!-- Buscar -->
+        <Tab Title="Buscar" Icon="search.svg">
+            <ShellContent
+                Title="Buscar"
+                Icon="search.svg"
+                ContentTemplate="{DataTemplate views:BuscarPage}"
+                Route="buscar" />
+        </Tab>
+
+        <!-- Tu biblioteca -->
+        <Tab Title="Biblioteca" Icon="book_fill.svg">
+            <ShellContent
+                Title="Biblioteca"
+                Icon="book_fill.svg"
+                ContentTemplate="{DataTemplate views:BibliotecaPage}"
+                Route="biblioteca" />
+        </Tab>
+
+        <!-- Crear -->
+        <Tab Title="Crear" Icon="plus_circle_fill.svg">
+            <ShellContent 
+                Title="Crear Música" 
+                ContentTemplate="{DataTemplate views:CrearMusicaPage}" 
+                Route="crearmusica"/>
+        </Tab>
+    </TabBar>
+</Shell>
